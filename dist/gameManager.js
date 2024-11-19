@@ -71,12 +71,15 @@ function fillVoicesOptions(language, voices) {
     defaultOption.textContent = `קול ברירת מחדל (${language})`;
     defaultOption.value = '';
     voiceSelect.appendChild(defaultOption);
-    // Add other available voices
+    const addedVoices = new Set();
     voices.forEach(voice => {
-        const option = document.createElement('option');
-        option.textContent = `${voice.name} (${voice.lang})`;
-        option.value = voice.name;
-        voiceSelect.appendChild(option);
+        if (!addedVoices.has(voice.name)) {
+            const option = document.createElement('option');
+            option.textContent = `${voice.name} (${voice.lang})`;
+            option.value = voice.name;
+            voiceSelect.appendChild(option);
+            addedVoices.add(voice.name);
+        }
     });
     selectVoice(language);
     initializeVoiceSelect();

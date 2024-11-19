@@ -93,17 +93,22 @@ function fillVoicesOptions(language: string, voices: SpeechSynthesisVoice[]) {
     defaultOption.value = '';
     voiceSelect.appendChild(defaultOption);
 
-    // Add other available voices
+    const addedVoices = new Set<string>();
+
     voices.forEach(voice => {
-        const option = document.createElement('option');
-        option.textContent = `${voice.name} (${voice.lang})`;
-        option.value = voice.name;
-        voiceSelect.appendChild(option);
+        if (!addedVoices.has(voice.name)) {
+            const option = document.createElement('option');
+            option.textContent = `${voice.name} (${voice.lang})`;
+            option.value = voice.name;
+            voiceSelect.appendChild(option);
+            addedVoices.add(voice.name);
+        }
     });
 
     selectVoice(language);
     initializeVoiceSelect();
 }
+
 
 function selectVoice(language: string) {
     const voiceSelect = document.getElementById('voiceSelect') as HTMLSelectElement;
