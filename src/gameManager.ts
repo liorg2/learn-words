@@ -106,11 +106,12 @@ function fillVoicesOptions(language: string, voices: SpeechSynthesisVoice[]) {
     });
 
     selectVoice(language);
-    initializeVoiceSelect();
+    initializeVoiceSelectEvents();
 }
 
 
 function selectVoice(language: string) {
+
     const voiceSelect = document.getElementById('voiceSelect') as HTMLSelectElement;
     const savedVoiceName = localStorage.getItem('selectedVoice__' + language);
     if (savedVoiceName) {
@@ -128,7 +129,7 @@ function selectVoice(language: string) {
     }
 }
 
-function initializeVoiceSelect() {
+function initializeVoiceSelectEvents() {
     const voiceSelect = document.getElementById('voiceSelect') as HTMLSelectElement;
     voiceSelect.addEventListener('change', handleVoiceChange);
 }
@@ -260,7 +261,16 @@ document.addEventListener('click', function (event) {
     }
 });
 
-let speakerEnabled = true;  // Initially disabled
+let speakerEnabled = false;  // Initially disabled
+
+function updateSpeakerIcon() {
+    const toggleSpeakerBtn = document.getElementById('toggleSpeakerBtn');
+    if (speakerEnabled) {
+        toggleSpeakerBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    } else {
+        toggleSpeakerBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    }
+}
 document.addEventListener('DOMContentLoaded', function () {
     log('DOMContentLoaded innerWidth= ' + window.innerWidth);
     const originalTestSelect: HTMLSelectElement = document.getElementById('testSelect') as HTMLSelectElement;
@@ -282,17 +292,17 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('speakerEnabled', speakerEnabled.toString());
         updateSpeakerIcon();
         if (speakerEnabled) {
-            VoiceService.getInstance().speak('Hello', 'en', 0);
+            VoiceService.getInstance().speak('Hi There', 'en', 1).then(
+                () => {
+                    log('speak enabled');
+                }
+            );
         }
     });
-
-    function updateSpeakerIcon() {
-        if (speakerEnabled) {
-            toggleSpeakerBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-        } else {
-            toggleSpeakerBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        }
+    if (new URLSearchParams(window.location.search).has('log')) {
+        document.getElementById('log').style.display = 'block';
     }
+
 
     // Initialize icon state on load
     updateSpeakerIcon();
@@ -336,8 +346,12 @@ document.addEventListener('DOMContentLoaded', function () {
             testSelectClone.addEventListener('change', function () {
                 document.body.removeChild(overlay);
                 originalTestSelect.value = this.value;
-                loadSelectedTest();
-                VoiceService.getInstance().speak('Welcome!', 'en', 1);
+
+
+                VoiceService.getInstance().speak('Lets get started!', 'en', 0).then(() => {
+                    loadSelectedTest();
+                });
+
 
             });
         } else {

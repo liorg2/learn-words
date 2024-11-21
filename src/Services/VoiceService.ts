@@ -1,7 +1,7 @@
 import {log} from '../utilities.js';
 
 const highQualityVoices = [
-    
+
 
     {
         name: "Samantha",
@@ -38,6 +38,7 @@ const highQualityVoices = [
 
 
 ];
+
 export class VoiceService {
     private static instance: VoiceService;
     private hasEnabledVoice = false;
@@ -47,8 +48,40 @@ export class VoiceService {
 
     private constructor() {
         this.voiceSelect = document.getElementById('voiceSelect') as HTMLSelectElement;
+        // if ('onvoiceschanged' in speechSynthesis) {
+        //     log('voiceschanged supported');
+        //     speechSynthesis.addEventListener('voiceschanged', () => {
+        //         log('voiceschanged event');
+        //     });
+        // } else {
+        //     log('voiceschanged not supported');
+        // }
+
+
+        if ('onvoiceschanged' in speechSynthesis) {
+            log('voiceschanged supported');
+            speechSynthesis.onvoiceschanged = () => {
+                log('voiceschanged event triggered');
+                this.logVoices();
+            };
+        } else {
+            log('voiceschanged not supported');
+            this.logVoices(); // Directly log voices if the event is not supported
+        }
+
 
     }
+
+    logVoices() {
+        const voices = speechSynthesis.getVoices();
+        log(`Available voices: ${voices.length}`);
+        if (voices.length > 0) {
+            log('Voices are loaded');
+        } else {
+            log('No voices are available');
+        }
+    }
+
 
     public static getInstance(): VoiceService {
         if (!VoiceService.instance) {
@@ -64,103 +97,114 @@ export class VoiceService {
             log('getVoices already loaded ' + language);
             return this.VoicePerLanguage.get(language);
         }
-        
+        if (speechSynthesis.getVoices().length > 0) {
+            const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith(`${language}-`));
+            const filteredVoices = voices.filter(voice => highQualityVoices.some(hqv =>
+                hqv.voiceURI === voice.voiceURI || hqv.name === voice.name || ["Google", "Microsoft"].some(v =>
+                    voice.name.includes(v) || voice.voiceURI.includes(v))));
+            this.VoicePerLanguage.set(language, filteredVoices.length > 0 ? filteredVoices : voices);
+            log('getVoices voices (loaded):  (' + language + ') - ' + filteredVoices.length + " /  total:" + voices.length);
+            return this.VoicePerLanguage.get(language);
+        }
 
-        log('getVoices ' + language);
-        
+
+        log('getVoices waiting .. ' + language);
+
         let attempts = 0;
         const maxAttempts = 50;
 
-        const checkVoices = () => {
-            return new Promise<void>((resolve) => {
-                const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith(`${language}-`));
-
-                const filteredVoices = voices.filter(voice => {
-                    return highQualityVoices.some(hqv => {
-                        return hqv.voiceURI === voice.voiceURI || hqv.name === voice.name || ["Google", "Microsoft"].some(v => voice.name.includes(v) || voice.voiceURI.includes(v));
-                    });
-                });
-                if (filteredVoices.length > 0) {
-                    this.VoicePerLanguage.set(language, filteredVoices);
-                } else {
-                    this.VoicePerLanguage.set(language, voices); // Fallback to default browser voices if no match
-                }
-                console.table(this.VoicePerLanguage.get(language));
-
-                if (this.VoicePerLanguage.get(language).length > 0 || attempts >= maxAttempts) {
-                    log('checkVoices voices: ' + voices.length);
-
-                    // Add default browser voice option
-
-                    resolve();
-                } else {
-                    log('checkVoices will retry attempts: ' + attempts);
-                    attempts++;
-                    setTimeout(() => checkVoices().then(resolve), 50);
-                }
+        const waitForVoices = (): Promise<void> => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith(`${language}-`));
+                    if (voices.length === 0 && attempts < maxAttempts) {
+                        attempts++;
+                        log('waitForVoices will retry attempts: ' + attempts);
+                        resolve(waitForVoices());  // Recursively resolve promise on retry
+                    } else {
+                        const filteredVoices = voices.filter(voice => highQualityVoices.some(hqv =>
+                            hqv.voiceURI === voice.voiceURI || hqv.name === voice.name || ["Google", "Microsoft"].some(v =>
+                                voice.name.includes(v) || voice.voiceURI.includes(v))));
+                        this.VoicePerLanguage.set(language, filteredVoices.length > 0 ? filteredVoices : voices);
+                        console.table(this.VoicePerLanguage.get(language));
+                        log('waitForVoices voices:  (' + language + ') - ' + filteredVoices.length + " /  total:" + voices.length);
+                        resolve();
+                    }
+                }, 50);
             });
         };
 
-        await checkVoices();
+        await waitForVoices();
 
         return this.VoicePerLanguage.get(language);
     }
 
 
-    public speak(text: string, language: string, volume: number = 1): void {
+    public speak(text: string, language: string, volume: number = 1): Promise<void> {
 
-        const speakerEnabled = localStorage.getItem('speakerEnabled');
+        return new Promise((resolve, reject) => {
+            const speakerEnabled = localStorage.getItem('speakerEnabled');
 
-        if (speakerEnabled === 'false') {
-            log('speak disabled');// by default true if not set
-            return;
-        }
-
-        this.getVoices(language).then(() => {
-
-
-            if (!this.hasEnabledVoice) {
-                const lecture = new SpeechSynthesisUtterance('hello Lior');
-                lecture.volume = 0;
-                window.speechSynthesis.cancel();
-                speechSynthesis.speak(lecture);
-                this.hasEnabledVoice = true;
+            if (speakerEnabled === 'false') {
+                log('speak disabled');// by default true if not set
+                resolve();
             }
 
-            //   this.speakTimeout = setTimeout(() => {
-            const utterance = new SpeechSynthesisUtterance(text);
-            const selectedVoice = this.voiceSelect.value;// todo move th ui from here
-            const langVoices: SpeechSynthesisVoice[] = this.VoicePerLanguage.get(language) || [];
-            if (selectedVoice) {
+            this.getVoices(language).then(() => {
 
-                const voice: SpeechSynthesisVoice = langVoices.find(voice => voice.name === selectedVoice);
-                if (voice) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.onerror = (event) => {
+                    log('speak error: ' + event.error + ' ' + text);
+                    reject(event.error);
+                }
+                utterance.onend = () => {
+                    log('speak end ' + text);
+
+                }
+                utterance.onstart = () => {
+                    log('speak start ' + text);
+                }
+
+                const selectedVoice = this.voiceSelect.value;// todo move th ui from here
+                const langVoices: SpeechSynthesisVoice[] = this.VoicePerLanguage.get(language) || [];
+                if (selectedVoice) {
+
+                    const voice: SpeechSynthesisVoice = langVoices.find(voice => voice.name === selectedVoice);
+                    if (voice) {
+                        utterance.voice = voice;
+                        utterance.lang = voice.lang; // Let the voice dictate the language
+                    }
+                } else {
+                    // If no voice selected, use default and set language to ensure correct pronunciation
+
+                    let voice = langVoices.find(v => v.default)
+                    if (!voice) {
+                        voice = langVoices[0];
+                    }
                     utterance.voice = voice;
-                    utterance.lang = voice.lang; // Let the voice dictate the language
+                    utterance.lang = voice.lang;
                 }
-            } else {
-                // If no voice selected, use default and set language to ensure correct pronunciation
-                let voice = langVoices.find(v => v.default)
-                if (!voice) {
-                    voice = langVoices[0];
-                }
-                utterance.voice = langVoices.find(v => v.default);
-                utterance.lang = voice.lang;
-            }
 
-            utterance.volume = volume;
+                utterance.volume = volume;
 
-            this.cancelSpeak(); // must be called before speaking
-            log('speak: ' + utterance.lang + ' ' + (utterance.voice?.name || 'default') + ' ' + text);
+                this.cancelSpeak(); // must be called before speaking otherwise doesnt play..
 
-            window.speechSynthesis.speak(utterance);
-            //  }, 500);
+
+                speechSynthesis.speak(utterance);
+                log('speak: ' + utterance.lang + ' ' + (utterance.voice?.name || 'default') + ' ' + text);
+                resolve();
+
+
+            }).catch(error => {
+                reject(error);
+                log('speak error: ' + error);
+            });
+
         });
 
     }
 
-    public cancelSpeak(): void {
-        clearTimeout(this.speakTimeout);
+    private cancelSpeak(): void {
         speechSynthesis.cancel();
     }
 }
