@@ -143,7 +143,7 @@ export class VoiceService {
     public speak(text: string, language: string, volume: number = 1): Promise<void> {
 
         return new Promise((resolve, reject) => {
-            const speakerEnabled = localStorage.getItem('speakerEnabled');
+            const speakerEnabled = sessionStorage.getItem('speakersEnabled');
 
             if (speakerEnabled === 'false') {
                 log('speak disabled');// by default true if not set

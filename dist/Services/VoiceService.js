@@ -66,7 +66,6 @@ export class VoiceService {
             this.logVoices(); // Directly log voices if the event is not supported
         }
     }
-
     logVoices() {
         const voices = speechSynthesis.getVoices();
         log(`Available voices: ${voices.length}`);
@@ -122,7 +121,7 @@ export class VoiceService {
     }
     speak(text, language, volume = 1) {
         return new Promise((resolve, reject) => {
-            const speakerEnabled = localStorage.getItem('speakerEnabled');
+            const speakerEnabled = sessionStorage.getItem('speakersEnabled');
             if (speakerEnabled === 'false') {
                 log('speak disabled'); // by default true if not set
                 resolve();

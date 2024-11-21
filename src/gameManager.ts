@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function () {
     toggleSpeakerBtn.addEventListener('click', function () {
         log('toggleSpeakerBtn clicked speakerEnabled= ' + speakerEnabled);
         speakerEnabled = !speakerEnabled; // Toggle the state
-        localStorage.setItem('speakerEnabled', speakerEnabled.toString());
+        sessionStorage.setItem('speakersEnabled', speakerEnabled.toString());
         updateSpeakerIcon();
         if (speakerEnabled) {
             VoiceService.getInstance().speak('Hi There', 'en', 1).then(
