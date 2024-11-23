@@ -88,7 +88,7 @@ export class VoiceService {
                 return this.VoicePerLanguage.get(language);
             }
             if (speechSynthesis.getVoices().length > 0) {
-                const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith(`${language}-`));
+                const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith(`${language}`));
                 const filteredVoices = voices.filter(voice => highQualityVoices.some(hqv => hqv.voiceURI === voice.voiceURI || hqv.name === voice.name || ["Google", "Microsoft"].some(v => voice.name.includes(v) || voice.voiceURI.includes(v))));
                 this.VoicePerLanguage.set(language, filteredVoices.length > 0 ? filteredVoices : voices);
                 log('getVoices voices (loaded):  (' + language + ') - ' + filteredVoices.length + " /  total:" + voices.length);
@@ -101,7 +101,7 @@ export class VoiceService {
                 return new Promise((resolve) => {
                     setTimeout(() => {
                         let all = speechSynthesis.getVoices();
-                        const langVoices = all.filter(v => v.lang.startsWith(`${language}-`));
+                        const langVoices = all.filter(v => v.lang.startsWith(`${language}`));
                         if (all.length === 0 && attempts < maxAttempts) {
                             attempts++;
                             log('waitForVoices will retry attempts: ' + attempts);
