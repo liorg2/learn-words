@@ -1,6 +1,12 @@
 tests_list = [
     {
 
+        scriptUrl: "2024-dec-en.js",
+        name: "אנגלית 12/24",
+        lang: 'en',
+    },
+    {
+
         scriptUrl: "2024-nov-fr-1.js",
         name: "צרפתית 11/24 - 1",
         lang: 'fr',
@@ -42,4 +48,5 @@ tests_list = [
         name: "צרפתית 10/24",
         lang: 'fr',
     },
+
 ];
