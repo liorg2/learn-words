@@ -1,6 +1,25 @@
 tests_list = [
     {
-
+        scriptUrl: "2025-mar-fr-1.js",
+        name: "צרפתית 3/25 - 1",
+        lang: 'fr',
+    },
+    {
+        scriptUrl: "2025-mar-fr-2.js",
+        name: "צרפתית 3/25 - 2",
+        lang: 'fr',
+    },
+    {
+        scriptUrl: "2025-mar-fr-3.js",
+        name: "צרפתית 3/25 - 3",
+        lang: 'fr',
+    },
+    {
+        scriptUrl: "2025-mar-fr-4.js",
+        name: "צרפתית 3/25 - 4",
+        lang: 'fr',
+    },
+    {
         scriptUrl: "2024-dec-en.js",
         name: "אנגלית 12/24",
         lang: 'en',
