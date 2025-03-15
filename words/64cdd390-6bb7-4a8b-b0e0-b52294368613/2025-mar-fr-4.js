@@ -133,8 +133,8 @@ words = [
         ]
     },
     {
-        "text": "quand est né...?",
-        "translation": "מתי נולד...?",
+        "text": "quand est tu né ?",
+        "translation": "מתי נולדת?",
         "partOfSpeech": "phrase",
         "sentences": [
             {
@@ -152,8 +152,8 @@ words = [
         ]
     },
     {
-        "text": "je suis né(e)...",
-        "translation": "נולדתי...",
+        "text": "je suis né le",
+        "translation": "נולדתי ב",
         "partOfSpeech": "phrase",
         "sentences": [
             {

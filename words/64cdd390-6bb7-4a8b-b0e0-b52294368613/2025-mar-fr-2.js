@@ -39,20 +39,20 @@ words = [
     },
     {
         "text": "énervé",
-        "translation": "עצבני",
+        "translation": "כועס",
         "partOfSpeech": "adjective",
         "sentences": [
             {
                 "from": "Il est énervé.",
-                "to": "הוא עצבני."
+                "to": "הוא כועס."
             },
             {
                 "from": "Je suis énervé.",
-                "to": "אני עצבני."
+                "to": "אני כועס."
             },
             {
                 "from": "Elle est énervée.",
-                "to": "היא עצבנית."
+                "to": "היא כועסת."
             }
         ]
     },
