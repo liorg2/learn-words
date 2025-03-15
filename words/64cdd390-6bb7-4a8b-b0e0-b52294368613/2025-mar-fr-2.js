@@ -2,31 +2,115 @@ words = [
     {
         "text": "content",
         "translation": "שמח",
-        "partOfSpeech": "adjective"
+        "partOfSpeech": "adjective",
+        "sentences": [
+            {
+                "from": "Je suis content.",
+                "to": "אני שמח."
+            },
+            {
+                "from": "Il est content.",
+                "to": "הוא שמח."
+            },
+            {
+                "from": "Elle est contente.",
+                "to": "היא שמחה."
+            }
+        ]
     },
     {
         "text": "triste",
         "translation": "עצוב",
-        "partOfSpeech": "adjective"
+        "partOfSpeech": "adjective",
+        "sentences": [
+            {
+                "from": "Je suis triste.",
+                "to": "אני עצוב."
+            },
+            {
+                "from": "L'enfant est triste.",
+                "to": "הילד עצוב."
+            },
+            {
+                "from": "Elle est triste aujourd'hui.",
+                "to": "היא עצובה היום."
+            }
+        ]
     },
     {
         "text": "énervé",
-        "translation": "עצבן",
-        "partOfSpeech": "adjective"
+        "translation": "עצבני",
+        "partOfSpeech": "adjective",
+        "sentences": [
+            {
+                "from": "Il est énervé.",
+                "to": "הוא עצבני."
+            },
+            {
+                "from": "Je suis énervé.",
+                "to": "אני עצבני."
+            },
+            {
+                "from": "Elle est énervée.",
+                "to": "היא עצבנית."
+            }
+        ]
     },
     {
         "text": "malade",
         "translation": "חולה",
-        "partOfSpeech": "adjective"
+        "partOfSpeech": "adjective",
+        "sentences": [
+            {
+                "from": "Je suis malade.",
+                "to": "אני חולה."
+            },
+            {
+                "from": "L'enfant est malade.",
+                "to": "הילד חולה."
+            },
+            {
+                "from": "Elle est malade.",
+                "to": "היא חולה."
+            }
+        ]
     },
     {
         "text": "fatigué",
         "translation": "עייף",
-        "partOfSpeech": "adjective"
+        "partOfSpeech": "adjective",
+        "sentences": [
+            {
+                "from": "Je suis fatigué.",
+                "to": "אני עייף."
+            },
+            {
+                "from": "Il est fatigué.",
+                "to": "הוא עייף."
+            },
+            {
+                "from": "Elle est fatiguée.",
+                "to": "היא עייפה."
+            }
+        ]
     },
     {
         "text": "inquiet",
         "translation": "דואג",
-        "partOfSpeech": "adjective"
+        "partOfSpeech": "adjective",
+        "sentences": [
+            {
+                "from": "Il est inquiet.",
+                "to": "הוא דואג."
+            },
+            {
+                "from": "Je suis inquiet.",
+                "to": "אני דואג."
+            },
+            {
+                "from": "Elle est inquiète.",
+                "to": "היא דואגת."
+            }
+        ]
     }
 ]
