@@ -218,7 +218,7 @@ words = [
         partOfSpeech: 'adverb',
         sentences: [
             {
-                from: "I couldn't find my keys anywhere in the house.",
+                from: "I could not find my keys anywhere in the house.",
                 to: "לא הצלחתי למצוא את המפתחות שלי בשום מקום בבית."
             },
             {

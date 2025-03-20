@@ -201,7 +201,7 @@ words = [
         partOfSpeech: 'verb',
         sentences: [
             {
-                from: "We're going to explore the ancient caves during our vacation.",
+                from: "We are going to explore the ancient caves during our vacation.",
                 to: "אנחנו הולכים לחקור את המערות העתיקות במהלך החופשה שלנו."
             },
             {
