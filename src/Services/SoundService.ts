@@ -16,11 +16,19 @@ export class SoundService {
     }
 
     public playCorrectSound(): void {
+        const speakerEnabled = sessionStorage.getItem('speakersEnabled');
+        if (speakerEnabled === 'false') {
+            return;
+        }
         this.correctSound.currentTime = 0;
         this.correctSound.play().catch(error => console.log('Error playing correct sound:', error));
     }
 
     public playIncorrectSound(): void {
+        const speakerEnabled = sessionStorage.getItem('speakersEnabled');
+        if (speakerEnabled === 'false') {
+            return;
+        }
         this.incorrectSound.currentTime = 0;
         this.incorrectSound.play().catch(error => console.log('Error playing incorrect sound:', error));
     }

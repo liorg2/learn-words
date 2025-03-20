@@ -235,6 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
         sendEvent('toggleMenu', 'game controls', 'toggle menu', { active: menu.classList.contains('active') });
     });
     const toggleSpeakerBtn = document.getElementById('toggleSpeakerBtn');
+    sessionStorage.setItem('speakersEnabled', speakerEnabled.toString());
     toggleSpeakerBtn.addEventListener('click', function () {
         log('toggleSpeakerBtn clicked speakerEnabled= ' + speakerEnabled);
         speakerEnabled = !speakerEnabled; // Toggle the state

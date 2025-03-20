@@ -286,6 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const toggleSpeakerBtn = document.getElementById('toggleSpeakerBtn');
+    sessionStorage.setItem('speakersEnabled', speakerEnabled.toString());
     toggleSpeakerBtn.addEventListener('click', function () {
         log('toggleSpeakerBtn clicked speakerEnabled= ' + speakerEnabled);
         speakerEnabled = !speakerEnabled; // Toggle the state
