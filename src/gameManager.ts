@@ -65,6 +65,14 @@ function loadSelectedTest() {
     const testSelect = document.getElementById('testSelect') as HTMLSelectElement;
     const gameTypeSelect = document.getElementById('gameTypeSelect') as HTMLSelectElement;
 
+    // Hide new game buttons
+    const newGameBtn = document.getElementById('newGameBtn');
+    const newGameBtnBottom = document.getElementById('newGameBtnBottom');
+    newGameBtn.style.display = 'none';
+    newGameBtnBottom.style.display = 'none';
+    newGameBtn.classList.remove('blink-once');
+    newGameBtnBottom.classList.remove('blink-once');
+
     sendEvent('loadSelectedTest', 'game controls', 'start new game', {
         game: testSelect.value,
         type: gameTypeSelect.value
@@ -78,10 +86,8 @@ function loadSelectedTest() {
             buildGame(selectedOption.dataset.lang!);
         });
 
-
         updateUrlParam('test', testSelect.selectedIndex.toString());
         updateUrlParam('gameType', gameTypeSelect.selectedIndex.toString());
-
     });
 }
 
@@ -267,14 +273,21 @@ function updateSpeakerIcon() {
     const toggleSpeakerBtn = document.getElementById('toggleSpeakerBtn');
     if (speakerEnabled) {
         toggleSpeakerBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        toggleSpeakerBtn.classList.remove('blink-once');
     } else {
         toggleSpeakerBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        toggleSpeakerBtn.classList.add('blink-once');
     }
 }
+
 document.addEventListener('DOMContentLoaded', function () {
     log('DOMContentLoaded innerWidth= ' + window.innerWidth);
     const originalTestSelect: HTMLSelectElement = document.getElementById('testSelect') as HTMLSelectElement;
     const gameTypeSelect: HTMLSelectElement = document.getElementById('gameTypeSelect') as HTMLSelectElement;
+
+    // Load speaker state from session storage with default of false
+    speakerEnabled = sessionStorage.getItem('speakersEnabled') === 'true';
+    updateSpeakerIcon();
 
     document.getElementById('toggleMenuBtn').addEventListener('click', function () {
         const menu = document.getElementById('menu');
@@ -286,7 +299,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const toggleSpeakerBtn = document.getElementById('toggleSpeakerBtn');
-    sessionStorage.setItem('speakersEnabled', speakerEnabled.toString());
     toggleSpeakerBtn.addEventListener('click', function () {
         log('toggleSpeakerBtn clicked speakerEnabled= ' + speakerEnabled);
         speakerEnabled = !speakerEnabled; // Toggle the state
@@ -304,14 +316,10 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('log').style.display = 'block';
     }
 
-
-    // Initialize icon state on load
-    updateSpeakerIcon();
-
-
     document.getElementById('increaseFont').addEventListener('click', () => changeFontSize(1));
     document.getElementById('decreaseFont').addEventListener('click', () => changeFontSize(-1));
     document.getElementById('newGameBtn').addEventListener('click', loadSelectedTest);
+    document.getElementById('newGameBtnBottom').addEventListener('click', loadSelectedTest);
     document.getElementById('closeSettings').addEventListener('click', closeSettings);
 
     // Populate both dropdowns

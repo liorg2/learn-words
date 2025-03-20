@@ -21,6 +21,9 @@ export class Game {
         this.translationContainer.innerHTML = '';
         document.getElementById('scoreDisplay').textContent = `${this.score}`;
         document.getElementById('numFailures').textContent = `${this.failures}`;
+        // Re-enable game area
+        const gameArea = document.querySelector('.game-area');
+        gameArea.classList.remove('disabled');
         this.bindEventHandlers();
     }
     bindEventHandlers() {
@@ -64,6 +67,18 @@ export class Game {
             statusMessage.textContent = "המשחק הסתיים בהצלחה!"; // Set message text
             sendEvent('game over success', 'game controls', 'game over', { score: this.score, failures: this.failures });
             statusMessage.classList.add('show');
+            // Show new game buttons
+            const newGameBtn = document.getElementById('newGameBtn');
+            const newGameBtnBottom = document.getElementById('newGameBtnBottom');
+            newGameBtn.style.display = 'inline-block';
+            newGameBtnBottom.style.display = 'block';
+            newGameBtn.classList.add('blink-once');
+            newGameBtnBottom.classList.add('blink-once');
+            // Disable game area
+            const gameArea = document.querySelector('.game-area');
+            gameArea.classList.add('disabled');
+            // Play game over sound
+            SoundService.getInstance().playGameOverSound();
             // Use setTimeout to allow the browser to redraw, then re-add the show class
             setTimeout(() => {
                 statusMessage.classList.remove('show');
@@ -75,6 +90,29 @@ export class Game {
         log('updateFailures ' + newVal);
         this.failures = newVal;
         document.getElementById('numFailures').textContent = newVal.toString();
+        // Check for game over after 5 failures
+        if (newVal >= 5) {
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.textContent = "המשחק הסתיים! נסה שוב!"; // Game over message
+            sendEvent('game over failure', 'game controls', 'game over', {score: this.score, failures: this.failures});
+            statusMessage.classList.add('show');
+            // Show new game buttons
+            const newGameBtn = document.getElementById('newGameBtn');
+            const newGameBtnBottom = document.getElementById('newGameBtnBottom');
+            newGameBtn.style.display = 'inline-block';
+            newGameBtnBottom.style.display = 'block';
+            newGameBtn.classList.add('blink-once');
+            newGameBtnBottom.classList.add('blink-once');
+            // Disable game area
+            const gameArea = document.querySelector('.game-area');
+            gameArea.classList.add('disabled');
+            // Play game over sound
+            SoundService.getInstance().playGameOverSound();
+            // Use setTimeout to allow the browser to redraw, then re-add the show class
+            setTimeout(() => {
+                statusMessage.classList.remove('show');
+            }, 4000); // Short delay
+        }
     }
     showConfetti() {
         const confettiCount = 100;
@@ -168,10 +206,9 @@ export class Game {
             document.body.appendChild(this.draggedElement);
             this.draggedElement.style.position = 'fixed';
             this.draggedElement.style.zIndex = '1000';
-            // this.draggedElement.style.border = '2px dashed red'; // Optional: add a dashed border
-            this.draggedElement.style.opacity = '0.5'; // Optional: make the clone semi-transparent
-            this.handleTouchMove(event); // Update position immediately
-            this.draggedElement.classList.add('dragging'); // Indicate original element is being dragged
+            this.draggedElement.style.opacity = '0.5';
+            this.handleTouchMove(event);
+            this.draggedElement.classList.add('dragging');
         });
     }
     handleTouchCancel(event) {

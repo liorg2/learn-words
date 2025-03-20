@@ -1,4 +1,3 @@
-
 html {
     font-size: 16px;
 }
@@ -20,6 +19,10 @@ body {
 
 #newGameBtn.blink-once {
     animation: blink-once 0.3s step-end 5;
+}
+
+#toggleSpeakerBtn.blink-once {
+    animation: blink-once 0.3s step-end 3;
 }
 
 @keyframes accordionEffect {
@@ -100,6 +103,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.game-area.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.game-area.disabled .word,
+.game-area.disabled .translation {
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
 .word-container,
@@ -555,5 +570,27 @@ button {
     text-align: left;
     padding: 0;
     margin: 0;
-    
+
+}
+
+#newGameBtnBottom {
+    display: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    user-select: none;
+    margin-top: 20px;
+}
+
+#newGameBtnBottom:hover {
+    background-color: #0056b3;
+}
+
+#newGameBtnBottom.blink-once {
+    animation: blink-once 0.3s step-end 5;
 }
