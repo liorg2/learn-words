@@ -3,6 +3,7 @@ import {GameType} from "../enums.js";
 import {GameWord} from "../globalTypes.js";
 import {sendEvent} from "../analytics.js";
 import {VoiceService} from '../Services/VoiceService.js';
+import {SoundService} from '../Services/SoundService.js';
 
 //test commit
 export class Game {
@@ -325,6 +326,14 @@ export class Game {
         const self = this;
         log('handleAnswer ' + targetEl.textContent + ' ' + wordElement.textContent + ' ' + isCorrect);
         const blinkClass = isCorrect ? 'blink-correct' : 'blink-incorrect';
+
+        // Play sound effect
+        const soundService = SoundService.getInstance();
+        if (isCorrect) {
+            soundService.playCorrectSound();
+        } else {
+            soundService.playIncorrectSound();
+        }
 
         sendEvent('handleAnswer', 'game controls', 'answer', {
             target: targetEl.textContent,
