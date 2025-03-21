@@ -8,6 +8,7 @@ export class Game {
     constructor(words, language) {
         this.score = 0;
         this.failures = 0;
+        this.lives = 10;
         this.hasEnabledVoice = false;
         this.draggedElement = null;
         this.draggedElementOriginal = null;
@@ -21,6 +22,7 @@ export class Game {
         this.translationContainer.innerHTML = '';
         document.getElementById('scoreDisplay').textContent = `${this.score}`;
         document.getElementById('numFailures').textContent = `${this.failures}`;
+        document.getElementById('livesDisplay').textContent = `${this.lives}`;
         // Re-enable game area
         const gameArea = document.querySelector('.game-area');
         gameArea.classList.remove('disabled');
@@ -90,8 +92,17 @@ export class Game {
         log('updateFailures ' + newVal);
         this.failures = newVal;
         document.getElementById('numFailures').textContent = newVal.toString();
-        // Check for game over after 5 failures
-        if (newVal >= 5) {
+        // Update lives
+        this.lives = Math.max(0, 10 - newVal);
+        const livesDisplay = document.getElementById('livesDisplay');
+        livesDisplay.textContent = `${this.lives}`;
+        // Add visual feedback when lives change
+        livesDisplay.classList.add('blink-once');
+        setTimeout(() => {
+            livesDisplay.classList.remove('blink-once');
+        }, 300);
+        // Check for game over when lives reach 0
+        if (this.lives <= 0) {
             const statusMessage = document.getElementById('statusMessage');
             statusMessage.textContent = "המשחק הסתיים! נסה שוב!"; // Game over message
             sendEvent('game over failure', 'game controls', 'game over', {score: this.score, failures: this.failures});

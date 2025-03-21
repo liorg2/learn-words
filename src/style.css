@@ -453,10 +453,13 @@ button {
     }
 }
 
-#scoreDisplay, #numFailures {font-weight: bold; font-size: 1.2rem;}
+#scoreDisplay, #numFailures, #livesDisplay {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
 
 @media (max-width: 1200px) {
-    #scoreDisplay, #numFailures {
+    #scoreDisplay, #numFailures, #livesDisplay {
         font-size: 0.8rem;
     }
 }

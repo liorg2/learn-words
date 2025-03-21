@@ -25,7 +25,6 @@ export class SoundService {
         this.incorrectSound.currentTime = 0;
         this.incorrectSound.play().catch(error => console.log('Error playing incorrect sound:', error));
     }
-
     playGameOverSound() {
         const gameOverSound = new Audio('../assets/sounds/game-over.mp3');
         const speakerEnabled = sessionStorage.getItem('speakersEnabled');
