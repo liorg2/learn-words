@@ -1,11 +1,32 @@
 export class SoundService {
     private static instance: SoundService;
-    private correctSound: HTMLAudioElement;
-    private incorrectSound: HTMLAudioElement;
+    private correctSound = new Audio('assets/correct.mp3');
+    private incorrectSound = new Audio('assets/error-2-36058.mp3');
+    private gameOverSound = new Audio('assets/game-over.mp3');
 
     private constructor() {
-        this.correctSound = new Audio('assets/correct.mp3');
-        this.incorrectSound = new Audio('assets/error-2-36058.mp3');
+    }
+
+    private static isSpeakerEnabled(): boolean {
+        return sessionStorage.getItem('speakersEnabled') !== 'false';
+    }
+
+    private playAudio(sound: HTMLAudioElement): void {
+        if (!SoundService.isSpeakerEnabled()) return;
+        sound.currentTime = 0;
+        sound.play().catch(error => console.log('Error playing sound:', error));
+    }
+
+    public playCorrectSound(): void {
+        this.playAudio(this.correctSound);
+    }
+
+    public playIncorrectSound(): void {
+        this.playAudio(this.incorrectSound);
+    }
+
+    public playGameOverSound(): void {
+        this.playAudio(this.gameOverSound);
     }
 
     public static getInstance(): SoundService {
@@ -14,32 +35,4 @@ export class SoundService {
         }
         return SoundService.instance;
     }
-
-    public playCorrectSound(): void {
-        const speakerEnabled = sessionStorage.getItem('speakersEnabled');
-        if (speakerEnabled === 'false') {
-            return;
-        }
-        this.correctSound.currentTime = 0;
-        this.correctSound.play().catch(error => console.log('Error playing correct sound:', error));
-    }
-
-    public playIncorrectSound(): void {
-        const speakerEnabled = sessionStorage.getItem('speakersEnabled');
-        if (speakerEnabled === 'false') {
-            return;
-        }
-        this.incorrectSound.currentTime = 0;
-        this.incorrectSound.play().catch(error => console.log('Error playing incorrect sound:', error));
-    }
-
-    public playGameOverSound(): void {
-        const gameOverSound = new Audio('assets/game-over.mp3');
-        const speakerEnabled = sessionStorage.getItem('speakersEnabled');
-        if (speakerEnabled === 'false') {
-            return;
-        }
-        gameOverSound.currentTime = 0;
-        gameOverSound.play().catch(error => console.log('Error playing game over sound:', error));
-    }
-} 
+}
