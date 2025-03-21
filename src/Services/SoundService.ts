@@ -5,6 +5,7 @@ export class SoundService {
 
     private constructor() {
         this.correctSound = new Audio('../assets/sounds/correct.mp3');
+        
         this.incorrectSound = new Audio('../assets/sounds/error-2-36058.mp3');
     }
 
