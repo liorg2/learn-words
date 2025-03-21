@@ -4,7 +4,7 @@
   "description": "",
   "main": "game.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node scripts/copy-sounds.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
