@@ -4,8 +4,8 @@ export class SoundService {
     private incorrectSound: HTMLAudioElement;
 
     private constructor() {
-        this.correctSound = new Audio('./sounds/correct.mp3');
-        this.incorrectSound = new Audio('./sounds/error-2-36058.mp3');
+        this.correctSound = new Audio('assets/correct.mp3');
+        this.incorrectSound = new Audio('assets/error-2-36058.mp3');
     }
 
     public static getInstance(): SoundService {
@@ -34,7 +34,7 @@ export class SoundService {
     }
 
     public playGameOverSound(): void {
-        const gameOverSound = new Audio('./sounds/game-over.mp3');
+        const gameOverSound = new Audio('assets/game-over.mp3');
         const speakerEnabled = sessionStorage.getItem('speakersEnabled');
         if (speakerEnabled === 'false') {
             return;
