@@ -51,7 +51,6 @@ export class SoundService {
             document.addEventListener('touchend', () => this.initIOSAudio(), {once: true});
         }
     }
-
     initIOSAudio() {
         if (this.audioInitialized)
             return;
@@ -84,7 +83,6 @@ export class SoundService {
     static isSpeakerEnabled() {
         return sessionStorage.getItem('speakersEnabled') !== 'false';
     }
-
     playAudio(sound) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!SoundService.isSpeakerEnabled())
