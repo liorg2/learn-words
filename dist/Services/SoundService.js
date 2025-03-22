@@ -4,7 +4,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             resolve(value);
         });
     }
-
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) {
             try {
@@ -25,109 +24,103 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         function step(result) {
             result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
         }
-
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 export class SoundService {
     constructor() {
-        this.audioContext = null;
-        this.soundBuffers = new Map();
+        this.audioInitialized = false;
         this.isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-        // Initialize audio elements
-        this.correctSound = new Audio('assets/correct.mp3');
-        this.incorrectSound = new Audio('assets/error-2-36058.mp3');
-        this.gameOverSound = new Audio('assets/game-over.mp3');
-        // Preload audio for iOS
+        // Create audio elements
+        this.correctSound = new Audio();
+        this.incorrectSound = new Audio();
+        this.gameOverSound = new Audio();
+        // Set sources
+        this.correctSound.src = 'assets/correct.mp3';
+        this.incorrectSound.src = 'assets/error-2-36058.mp3';
+        this.gameOverSound.src = 'assets/game-over.mp3';
+        // Set to low latency mode
+        this.correctSound.preload = 'auto';
+        this.incorrectSound.preload = 'auto';
+        this.gameOverSound.preload = 'auto';
+        // Initialize audio on iOS
         if (this.isIOS) {
-            this.initAudioContext();
-            this.preloadAudio('assets/correct.mp3', 'correct');
-            this.preloadAudio('assets/error-2-36058.mp3', 'incorrect');
-            this.preloadAudio('assets/game-over.mp3', 'gameOver');
-        }
-        // Add touch event listener for iOS
-        document.addEventListener('touchstart', () => {
-            var _a;
-            if (this.isIOS && ((_a = this.audioContext) === null || _a === void 0 ? void 0 : _a.state) === 'suspended') {
-                this.audioContext.resume();
-            }
-        }, {once: true});
-    }
-
-    initAudioContext() {
-        try {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            this.audioContext = new AudioContext();
-        } catch (error) {
-            console.error('Web Audio API not supported:', error);
+            this.initIOSAudio();
+            // Add touch event listeners to the document
+            document.addEventListener('touchstart', () => this.initIOSAudio(), {once: true});
+            document.addEventListener('touchend', () => this.initIOSAudio(), {once: true});
         }
     }
 
-    preloadAudio(url, id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!this.audioContext)
-                return;
+    initIOSAudio() {
+        if (this.audioInitialized)
+            return;
+        // Load all sounds
+        const loadSound = (audio) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield fetch(url);
-                const arrayBuffer = yield response.arrayBuffer();
-                const audioBuffer = yield this.audioContext.decodeAudioData(arrayBuffer);
-                this.soundBuffers.set(id, audioBuffer);
+                audio.load();
+                if (this.isIOS) {
+                    // Set volume to 0 for initial play
+                    audio.volume = 0;
+                    yield audio.play();
+                    yield audio.pause();
+                    audio.currentTime = 0;
+                    audio.volume = 1;
+                }
             } catch (error) {
-                console.error(`Error loading sound ${id}:`, error);
+                console.error('Error initializing audio:', error);
             }
         });
-    }
-
-    playIOSAudio(buffer) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!this.audioContext)
-                return;
-            try {
-                const source = this.audioContext.createBufferSource();
-                source.buffer = buffer;
-                source.connect(this.audioContext.destination);
-                source.start(0);
-            } catch (error) {
-                console.error('Error playing iOS audio:', error);
-            }
+        // Initialize all sounds
+        Promise.all([
+            loadSound(this.correctSound),
+            loadSound(this.incorrectSound),
+            loadSound(this.gameOverSound)
+        ]).then(() => {
+            this.audioInitialized = true;
+            console.log('Audio initialized successfully');
         });
     }
     static isSpeakerEnabled() {
         return sessionStorage.getItem('speakersEnabled') !== 'false';
     }
 
-    playAudio(sound, bufferId) {
+    playAudio(sound) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!SoundService.isSpeakerEnabled())
                 return;
-            if (this.isIOS) {
-                const buffer = this.soundBuffers.get(bufferId);
-                if (buffer) {
-                    yield this.playIOSAudio(buffer);
-                }
-            } else {
-                sound.currentTime = 0;
-                try {
+            try {
+                // For iOS, we need to handle the play/pause cycle
+                if (this.isIOS) {
+                    sound.currentTime = 0;
                     yield sound.play();
-                } catch (error) {
-                    console.log('Error playing sound:', error);
+                } else {
+                    // For other platforms, simply play
+                    sound.currentTime = 0;
+                    yield sound.play();
+                }
+            } catch (error) {
+                console.error('Error playing sound:', error);
+                // Try to reinitialize audio if there was an error
+                if (this.isIOS) {
+                    this.initIOSAudio();
                 }
             }
         });
     }
     playCorrectSound() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.playAudio(this.correctSound, 'correct');
+            yield this.playAudio(this.correctSound);
         });
     }
     playIncorrectSound() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.playAudio(this.incorrectSound, 'incorrect');
+            yield this.playAudio(this.incorrectSound);
         });
     }
     playGameOverSound() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.playAudio(this.gameOverSound, 'gameOver');
+            yield this.playAudio(this.gameOverSound);
         });
     }
     static getInstance() {
