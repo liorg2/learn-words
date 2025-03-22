@@ -76,8 +76,8 @@ words = [
         ]
     },
     {
-        text: "peace", 
-        translation: 'שלווה',
+        text: "peace",
+        translation: 'שלום',
         partOfSpeech: 'noun',
         sentences: [
             {
@@ -86,7 +86,7 @@ words = [
             },
             {
                 from: "After the storm, there was a moment of peace.",
-                to: "אחרי הסערה, הייתה רגע של שלווה."
+                to: "אחרי המלחמה, המדינות ערכו הסכם שלום."
             }
         ]
     },
