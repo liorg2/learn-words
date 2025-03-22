@@ -268,6 +268,8 @@ document.addEventListener('click', function (event) {
 });
 
 let speakerEnabled = false;  // Initially disabled
+sessionStorage.setItem('speakersEnabled', speakerEnabled.toString());// reset speaker state
+
 
 function updateSpeakerIcon() {
     const toggleSpeakerBtn = document.getElementById('toggleSpeakerBtn');
@@ -285,8 +287,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const originalTestSelect: HTMLSelectElement = document.getElementById('testSelect') as HTMLSelectElement;
     const gameTypeSelect: HTMLSelectElement = document.getElementById('gameTypeSelect') as HTMLSelectElement;
 
+
     // Load speaker state from session storage with default of false
-    speakerEnabled = sessionStorage.getItem('speakersEnabled') === 'true';
     updateSpeakerIcon();
 
     document.getElementById('toggleMenuBtn').addEventListener('click', function () {
