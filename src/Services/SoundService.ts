@@ -3,99 +3,103 @@ export class SoundService {
     private correctSound: HTMLAudioElement;
     private incorrectSound: HTMLAudioElement;
     private gameOverSound: HTMLAudioElement;
-    private audioContext: AudioContext | null = null;
-    private soundBuffers: Map<string, AudioBuffer> = new Map();
-    private isIOS: boolean = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    private isIOS: boolean;
+    private audioInitialized: boolean = false;
 
     private constructor() {
-        // Initialize audio elements
-        this.correctSound = new Audio('assets/correct.mp3');
-        this.incorrectSound = new Audio('assets/error-2-36058.mp3');
-        this.gameOverSound = new Audio('assets/game-over.mp3');
+        this.isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-        // Preload audio for iOS
+        // Create audio elements
+        this.correctSound = new Audio();
+        this.incorrectSound = new Audio();
+        this.gameOverSound = new Audio();
+
+        // Set sources
+        this.correctSound.src = 'assets/correct.mp3';
+        this.incorrectSound.src = 'assets/error-2-36058.mp3';
+        this.gameOverSound.src = 'assets/game-over.mp3';
+
+        // Set to low latency mode
+        this.correctSound.preload = 'auto';
+        this.incorrectSound.preload = 'auto';
+        this.gameOverSound.preload = 'auto';
+
+        // Initialize audio on iOS
         if (this.isIOS) {
-            this.initAudioContext();
-            this.preloadAudio('assets/correct.mp3', 'correct');
-            this.preloadAudio('assets/error-2-36058.mp3', 'incorrect');
-            this.preloadAudio('assets/game-over.mp3', 'gameOver');
+            this.initIOSAudio();
+            // Add touch event listeners to the document
+            document.addEventListener('touchstart', () => this.initIOSAudio(), {once: true});
+            document.addEventListener('touchend', () => this.initIOSAudio(), {once: true});
         }
+    }
 
-        // Add touch event listener for iOS
-        document.addEventListener('touchstart', () => {
-            if (this.isIOS && this.audioContext?.state === 'suspended') {
-                this.audioContext.resume();
+    private initIOSAudio(): void {
+        if (this.audioInitialized) return;
+
+        // Load all sounds
+        const loadSound = async (audio: HTMLAudioElement) => {
+            try {
+                audio.load();
+                if (this.isIOS) {
+                    // Set volume to 0 for initial play
+                    audio.volume = 0;
+                    await audio.play();
+                    await audio.pause();
+                    audio.currentTime = 0;
+                    audio.volume = 1;
+                }
+            } catch (error) {
+                console.error('Error initializing audio:', error);
             }
-        }, {once: true});
-    }
+        };
 
-    private initAudioContext() {
-        try {
-            const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
-            this.audioContext = new AudioContext();
-        } catch (error) {
-            console.error('Web Audio API not supported:', error);
-        }
-    }
-
-    private async preloadAudio(url: string, id: string) {
-        if (!this.audioContext) return;
-
-        try {
-            const response = await fetch(url);
-            const arrayBuffer = await response.arrayBuffer();
-            const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
-            this.soundBuffers.set(id, audioBuffer);
-        } catch (error) {
-            console.error(`Error loading sound ${id}:`, error);
-        }
-    }
-
-    private async playIOSAudio(buffer: AudioBuffer) {
-        if (!this.audioContext) return;
-
-        try {
-            const source = this.audioContext.createBufferSource();
-            source.buffer = buffer;
-            source.connect(this.audioContext.destination);
-            source.start(0);
-        } catch (error) {
-            console.error('Error playing iOS audio:', error);
-        }
+        // Initialize all sounds
+        Promise.all([
+            loadSound(this.correctSound),
+            loadSound(this.incorrectSound),
+            loadSound(this.gameOverSound)
+        ]).then(() => {
+            this.audioInitialized = true;
+            console.log('Audio initialized successfully');
+        });
     }
 
     private static isSpeakerEnabled(): boolean {
         return sessionStorage.getItem('speakersEnabled') !== 'false';
     }
 
-    private async playAudio(sound: HTMLAudioElement, bufferId: string): Promise<void> {
+    private async playAudio(sound: HTMLAudioElement): Promise<void> {
         if (!SoundService.isSpeakerEnabled()) return;
 
-        if (this.isIOS) {
-            const buffer = this.soundBuffers.get(bufferId);
-            if (buffer) {
-                await this.playIOSAudio(buffer);
-            }
-        } else {
-            sound.currentTime = 0;
-            try {
+        try {
+            // For iOS, we need to handle the play/pause cycle
+            if (this.isIOS) {
+                sound.currentTime = 0;
                 await sound.play();
-            } catch (error) {
-                console.log('Error playing sound:', error);
+            } else {
+                // For other platforms, simply play
+                sound.currentTime = 0;
+                await sound.play();
+            }
+        } catch (error) {
+            console.error('Error playing sound:', error);
+            // Try to reinitialize audio if there was an error
+            if (this.isIOS) {
+                this.initIOSAudio();
             }
         }
     }
 
     public async playCorrectSound(): Promise<void> {
-        await this.playAudio(this.correctSound, 'correct');
+        await this.playAudio(this.correctSound);
     }
 
     public async playIncorrectSound(): Promise<void> {
-        await this.playAudio(this.incorrectSound, 'incorrect');
+        await this.playAudio(this.incorrectSound);
     }
 
     public async playGameOverSound(): Promise<void> {
-        await this.playAudio(this.gameOverSound, 'gameOver');
+        await this.playAudio(this.gameOverSound);
     }
 
     public static getInstance(): SoundService {
