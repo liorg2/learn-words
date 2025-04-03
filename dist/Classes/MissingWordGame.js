@@ -13,7 +13,9 @@ export class MissingWordGame extends Game {
         sentenceContainer.innerHTML = ''; // Clear previous content
         const randomSentence = this.getRandomWordAndModifiedSentence();
         const targetDiv = document.createElement('div');
-        targetDiv.textContent = randomSentence.modifiedSentence + '\n' + randomSentence.translation;
+        // targetDiv.textContent = randomSentence.modifiedSentence + '<br/>' + randomSentence.translation;
+        //targetDiv.innerHTML = randomSentence.translation + '<br/><br/>' + randomSentence.modifiedSentence;
+        targetDiv.innerHTML = `<strong>${randomSentence.translation}</strong><br/><br/>${randomSentence.modifiedSentence}`;
         targetDiv.className = 'translation ltr';
         targetDiv.addEventListener('dragover', this.handleDragOver);
         targetDiv.addEventListener('dragleave', this.handleDragLeave);
