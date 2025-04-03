@@ -227,7 +227,8 @@ function updateSpeakerIcon() {
     if (speakerEnabled) {
         toggleSpeakerBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
         toggleSpeakerBtn.classList.remove('blink-once');
-    } else {
+    }
+    else {
         toggleSpeakerBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
         toggleSpeakerBtn.classList.add('blink-once');
     }

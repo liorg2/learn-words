@@ -2,7 +2,7 @@ import { log, shuffleArray } from "../utilities.js";
 import { GameType } from "../enums.js";
 import { sendEvent } from "../analytics.js";
 import { VoiceService } from '../Services/VoiceService.js';
-import {SoundService} from '../Services/SoundService.js';
+import { SoundService } from '../Services/SoundService.js';
 //test commit
 export class Game {
     constructor(words, language) {
@@ -105,7 +105,7 @@ export class Game {
         if (this.lives <= 0) {
             const statusMessage = document.getElementById('statusMessage');
             statusMessage.textContent = "המשחק הסתיים! נסה שוב!"; // Game over message
-            sendEvent('game over failure', 'game controls', 'game over', {score: this.score, failures: this.failures});
+            sendEvent('game over failure', 'game controls', 'game over', { score: this.score, failures: this.failures });
             statusMessage.classList.add('show');
             // Show new game buttons
             const newGameBtn = document.getElementById('newGameBtn');
@@ -308,7 +308,8 @@ export class Game {
         const soundService = SoundService.getInstance();
         if (isCorrect) {
             soundService.playCorrectSound();
-        } else {
+        }
+        else {
             soundService.playIncorrectSound();
         }
         sendEvent('handleAnswer', 'game controls', 'answer', {

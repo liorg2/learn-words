@@ -61,7 +61,8 @@ export class VoiceService {
                 log('voiceschanged event triggered');
                 this.logVoices();
             };
-        } else {
+        }
+        else {
             log('voiceschanged not supported');
             this.logVoices(); // Directly log voices if the event is not supported
         }
@@ -71,7 +72,8 @@ export class VoiceService {
         log(`Available voices: ${voices.length}`);
         if (voices.length > 0) {
             log('Voices are loaded: ' + voices.map(v => v.name + "-" + v.lang).join(', '));
-        } else {
+        }
+        else {
             log('No voices are available');
         }
     }
@@ -106,7 +108,8 @@ export class VoiceService {
                             attempts++;
                             log('waitForVoices will retry attempts: ' + attempts);
                             resolve(waitForVoices()); // Recursively resolve promise on retry
-                        } else {
+                        }
+                        else {
                             const filteredVoices = langVoices.filter(voice => highQualityVoices.some(hqv => hqv.voiceURI === voice.voiceURI || hqv.name === voice.name || ["Google", "Microsoft"].some(v => voice.name.includes(v) || voice.voiceURI.includes(v))));
                             this.VoicePerLanguage.set(language, filteredVoices.length > 0 ? filteredVoices : langVoices);
                             console.table(this.VoicePerLanguage.get(language));
@@ -126,7 +129,8 @@ export class VoiceService {
             if (speakerEnabled === 'false') {
                 log('speak disabled'); // by default true if not set
                 resolve();
-            } else {
+            }
+            else {
                 log('speak enabled');
                 this.getVoices(language).then(() => {
                     var _a;
@@ -149,7 +153,8 @@ export class VoiceService {
                             utterance.voice = voice;
                             utterance.lang = voice.lang; // Let the voice dictate the language
                         }
-                    } else {
+                    }
+                    else {
                         // If no voice selected, use default and set language to ensure correct pronunciation
                         let voice = langVoices.find(v => v.default);
                         if (!voice && langVoices.length > 0) {

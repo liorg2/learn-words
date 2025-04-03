@@ -1,29 +1,9 @@
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) {
-        return value instanceof P ? value : new P(function (resolve) {
-            resolve(value);
-        });
-    }
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-
-        function step(result) {
-            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -47,8 +27,8 @@ export class SoundService {
         if (this.isIOS) {
             this.initIOSAudio();
             // Add touch event listeners to the document
-            document.addEventListener('touchstart', () => this.initIOSAudio(), {once: true});
-            document.addEventListener('touchend', () => this.initIOSAudio(), {once: true});
+            document.addEventListener('touchstart', () => this.initIOSAudio(), { once: true });
+            document.addEventListener('touchend', () => this.initIOSAudio(), { once: true });
         }
     }
     initIOSAudio() {
@@ -66,7 +46,8 @@ export class SoundService {
                     audio.currentTime = 0;
                     audio.volume = 1;
                 }
-            } catch (error) {
+            }
+            catch (error) {
                 console.error('Error initializing audio:', error);
             }
         });
@@ -92,12 +73,14 @@ export class SoundService {
                 if (this.isIOS) {
                     sound.currentTime = 0;
                     yield sound.play();
-                } else {
+                }
+                else {
                     // For other platforms, simply play
                     sound.currentTime = 0;
                     yield sound.play();
                 }
-            } catch (error) {
+            }
+            catch (error) {
                 console.error('Error playing sound:', error);
                 // Try to reinitialize audio if there was an error
                 if (this.isIOS) {

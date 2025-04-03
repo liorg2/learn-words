@@ -1,0 +1,20 @@
+words = [
+    {text: "duck", translation: 'ברווז'},
+    {text: "horse", translation: 'סוס'},
+    {text: "good for you", translation: 'כל הכבוד'},
+    {text: "okay", translation: 'בסדר'},
+    {text: "we", translation: 'אנחנו'},
+    {text: "they", translation: 'הם'},
+    {text: "come", translation: 'לבוא'},
+    {text: "near", translation: 'קרוב'},
+    {text: "funny", translation: 'מצחיק'},
+    {text: "today", translation: 'היום'},
+    {text: "drinking", translation: 'שותה'},
+    {text: "farm", translation: 'חווה'},
+    {text: "brother", translation: 'אח'},
+    {text: "animals", translation: 'חיות'},
+    {text: "children", translation: 'ילדים'},
+    {text: "sister", translation: 'אחות'},
+    {text: "too", translation: 'גם'},
+    {text: "sky", translation: 'שמיים'}
+];
