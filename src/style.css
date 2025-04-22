@@ -618,3 +618,36 @@ button {
     background-color: #4caf50;
     color: #ffffff;
 }
+
+/* Word search grid responsiveness */
+@media (max-width: 768px) {
+    .word-search-grid {
+        gap: 0 !important;
+    }
+    
+    .word-search-cell {
+        font-size: 0.8rem !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
+        max-width: 32px;
+        max-height: 32px;
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    .words-list {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .word-search-cell {
+        min-width: 28px !important;
+        min-height: 28px !important;
+        max-width: 28px;
+        max-height: 28px;
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 0.7rem !important;
+    }
+}
