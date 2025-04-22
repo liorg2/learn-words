@@ -125,10 +125,15 @@ export class WordSearchGame extends Game {
                 cell.dataset.x = x.toString();
                 cell.dataset.y = y.toString();
                 
-                // Add event listeners for selection
+                // Add mouse event listeners for selection
                 cell.addEventListener('mousedown', this.handleCellMouseDown.bind(this));
                 cell.addEventListener('mouseover', this.handleCellMouseOver.bind(this));
                 cell.addEventListener('mouseup', this.handleCellMouseUp.bind(this));
+                
+                // Add touch event listeners for mobile
+                cell.addEventListener('touchstart', this.handleCellTouchStart.bind(this));
+                cell.addEventListener('touchmove', this.handleCellTouchMove.bind(this));
+                cell.addEventListener('touchend', this.handleCellTouchEnd.bind(this));
                 
                 // Prevent text selection while dragging
                 cell.addEventListener('selectstart', (e) => e.preventDefault());
@@ -141,6 +146,7 @@ export class WordSearchGame extends Game {
         
         // Add document-level event listener to handle case when mouse is released outside the grid
         document.addEventListener('mouseup', this.handleDocumentMouseUp.bind(this));
+        document.addEventListener('touchend', this.handleDocumentTouchEnd.bind(this));
     }
     
     generateWordSearch() {
@@ -472,5 +478,63 @@ export class WordSearchGame extends Game {
             cell.classList.remove('selected');
         }
         this.selectedCells = [];
+    }
+
+    handleCellTouchStart(event: TouchEvent) {
+        event.preventDefault(); // Prevent scrolling
+        const touch = event.touches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY) as HTMLElement;
+        
+        if (element && element.classList.contains('word-search-cell')) {
+            this.currentSelection = true;
+            this.selectedCells = [element];
+            element.classList.add('selected');
+        }
+    }
+
+    handleCellTouchMove(event: TouchEvent) {
+        event.preventDefault(); // Prevent scrolling
+        if (!this.currentSelection) return;
+        
+        const touch = event.touches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY) as HTMLElement;
+        
+        if (element && element.classList.contains('word-search-cell') && this.isValidNextCell(element)) {
+            // Remove all selections after the first cell
+            while (this.selectedCells.length > 1) {
+                const cellToRemove = this.selectedCells.pop();
+                cellToRemove.classList.remove('selected');
+            }
+            
+            // Add all cells in the line between first selected and current
+            const firstCell = this.selectedCells[0];
+            const cellsBetween = this.getCellsBetween(firstCell, element);
+            
+            for (const betweenCell of cellsBetween) {
+                if (!this.selectedCells.includes(betweenCell)) {
+                    this.selectedCells.push(betweenCell);
+                    betweenCell.classList.add('selected');
+                }
+            }
+            
+            // Add the current cell if not already added
+            if (!this.selectedCells.includes(element)) {
+                this.selectedCells.push(element);
+                element.classList.add('selected');
+            }
+        }
+    }
+
+    handleCellTouchEnd(event: TouchEvent) {
+        event.preventDefault(); // Prevent default behavior
+        this.checkSelectedWord();
+        this.resetSelection();
+    }
+
+    handleDocumentTouchEnd() {
+        if (this.currentSelection) {
+            this.checkSelectedWord();
+            this.resetSelection();
+        }
     }
 }
