@@ -5,23 +5,23 @@ tests_list = [
         lang: 'en',
     },
     {
-        scriptUrl: "2025-mar-en-2.js",
-        name: "אנגלית 3/25 - 2",
+        scriptUrl: "2025-may-en-2.js",
+        name: "אנגלית 4/25 - 2",
         lang: 'en',
     },
     {
-        scriptUrl: "2025-mar-en-3.js",
-        name: "אנגלית 3/25 - 3",
+        scriptUrl: "2025-may-en-3.js",
+        name: "אנגלית 4/25 - 3",
         lang: 'en',
     },
     {
-        scriptUrl: "2025-mar-en-4.js",
-        name: "אנגלית 3/25 - 4",
+        scriptUrl: "2025-may-en-4.js",
+        name: "אנגלית 3/254/25 - 4",
         lang: 'en',
     },
     {
-        scriptUrl: "2025-mar-en-5.js",
-        name: "אנגלית 3/25 - 5",
+        scriptUrl: "2025-may-en-5.js",
+        name: "אנגלית 4/25 - 5",
         lang: 'en',
     },
     {
