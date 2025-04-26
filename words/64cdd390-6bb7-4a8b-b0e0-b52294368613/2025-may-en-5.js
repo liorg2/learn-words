@@ -1,4 +1,4 @@
-export const words = [
+words = [
     {
         "text": "space",
         "translation": "מקום – חלל חיצון",
