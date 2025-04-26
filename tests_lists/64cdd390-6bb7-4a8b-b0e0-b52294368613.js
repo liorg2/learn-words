@@ -1,27 +1,27 @@
 tests_list = [
     {
-        scriptUrl: "2025-mar-en-1.js",
-        name: "אנגלית 3/25 - 1",
+        scriptUrl: "2025-may-en-1.js",
+        name: "אנגלית /5/25 - 1",
         lang: 'en',
     },
     {
         scriptUrl: "2025-may-en-2.js",
-        name: "אנגלית 4/25 - 2",
+        name: "אנגלית 5/25 - 2",
         lang: 'en',
     },
     {
         scriptUrl: "2025-may-en-3.js",
-        name: "אנגלית 4/25 - 3",
+        name: "אנגלית 5/25 - 3",
         lang: 'en',
     },
     {
         scriptUrl: "2025-may-en-4.js",
-        name: "אנגלית 3/254/25 - 4",
+        name: "אנגלית 5/25 - 4",
         lang: 'en',
     },
     {
         scriptUrl: "2025-may-en-5.js",
-        name: "אנגלית 4/25 - 5",
+        name: "אנגלית 5/25 - 5",
         lang: 'en',
     },
     {
