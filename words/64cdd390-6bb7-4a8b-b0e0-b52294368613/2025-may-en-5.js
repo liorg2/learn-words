@@ -4,18 +4,9 @@ words = [
         "translation": "מקום – חלל חיצון",
         "partOfSpeech": "noun",
         "sentences": [
-            {
-                "from": "Example sentence with space.",
-                "to": "תרגום לדוגמה עם space."
-            },
-            {
-                "from": "Another use of space in a sentence.",
-                "to": "שימוש נוסף של space במשפט."
-            },
-            {
-                "from": "Space can be seen here.",
-                "to": "אפשר לראות את space כאן."
-            }
+            {"from": "Astronauts travel into space.", "to": "אסטרונאוטים נוסעים לחלל."},
+            {"from": "I need more space in my room.", "to": "אני צריך יותר מקום בחדר שלי."},
+            {"from": "Space exploration is fascinating.", "to": "חקר החלל מרתק."}
         ]
     },
     {
@@ -23,18 +14,9 @@ words = [
         "translation": "נורא",
         "partOfSpeech": "adjective",
         "sentences": [
-            {
-                "from": "Example sentence with terrible.",
-                "to": "תרגום לדוגמה עם terrible."
-            },
-            {
-                "from": "Another use of terrible in a sentence.",
-                "to": "שימוש נוסף של terrible במשפט."
-            },
-            {
-                "from": "Terrible can be seen here.",
-                "to": "אפשר לראות את terrible כאן."
-            }
+            {"from": "The weather was terrible yesterday.", "to": "מזג האוויר היה נורא אתמול."},
+            {"from": "She felt terrible after the mistake.", "to": "היא הרגישה נורא אחרי הטעות."},
+            {"from": "That movie was terrible.", "to": "הסרט ההוא היה נורא."}
         ]
     },
     {
@@ -42,18 +24,9 @@ words = [
         "translation": "איום, סכנה",
         "partOfSpeech": "noun",
         "sentences": [
-            {
-                "from": "Example sentence with threat.",
-                "to": "תרגום לדוגמה עם threat."
-            },
-            {
-                "from": "Another use of threat in a sentence.",
-                "to": "שימוש נוסף של threat במשפט."
-            },
-            {
-                "from": "Threat can be seen here.",
-                "to": "אפשר לראות את threat כאן."
-            }
+            {"from": "Pollution is a threat to the environment.", "to": "זיהום הוא איום על הסביבה."},
+            {"from": "The soldiers faced a serious threat.", "to": "החיילים עמדו בפני איום רציני."},
+            {"from": "The storm posed a threat to the village.", "to": "הסערה היוותה איום על הכפר."}
         ]
     },
     {
@@ -61,18 +34,9 @@ words = [
         "translation": "שימוש",
         "partOfSpeech": "noun",
         "sentences": [
-            {
-                "from": "Example sentence with use.",
-                "to": "תרגום לדוגמה עם use."
-            },
-            {
-                "from": "Another use of use in a sentence.",
-                "to": "שימוש נוסף של use במשפט."
-            },
-            {
-                "from": "Use can be seen here.",
-                "to": "אפשר לראות את use כאן."
-            }
+            {"from": "The use of solar energy is growing.", "to": "השימוש באנרגיה סולארית הולך וגדל."},
+            {"from": "This tool has many uses.", "to": "לכלי הזה יש שימושים רבים."},
+            {"from": "Proper use of words is important.", "to": "שימוש נכון במילים הוא חשוב."}
         ]
     },
     {
@@ -80,18 +44,9 @@ words = [
         "translation": "זבל, בזבוז",
         "partOfSpeech": "noun",
         "sentences": [
-            {
-                "from": "Example sentence with waste.",
-                "to": "תרגום לדוגמה עם waste."
-            },
-            {
-                "from": "Another use of waste in a sentence.",
-                "to": "שימוש נוסף של waste במשפט."
-            },
-            {
-                "from": "Waste can be seen here.",
-                "to": "אפשר לראות את waste כאן."
-            }
+            {"from": "Don't waste food.", "to": "אל תבזבז אוכל."},
+            {"from": "There was a lot of waste after the festival.", "to": "היה הרבה זבל אחרי הפסטיבל."},
+            {"from": "They found ways to reduce waste.", "to": "הם מצאו דרכים להפחית בזבוז."}
         ]
     },
     {
@@ -99,18 +54,20 @@ words = [
         "translation": "פראי",
         "partOfSpeech": "adjective",
         "sentences": [
-            {
-                "from": "Example sentence with wild.",
-                "to": "תרגום לדוגמה עם wild."
-            },
-            {
-                "from": "Another use of wild in a sentence.",
-                "to": "שימוש נוסף של wild במשפט."
-            },
-            {
-                "from": "Wild can be seen here.",
-                "to": "אפשר לראות את wild כאן."
-            }
+            {"from": "Wild animals live in the forest.", "to": "חיות פרא חיות ביער."},
+            {"from": "He went on a wild adventure.", "to": "הוא יצא להרפתקה פראית."},
+            {"from": "The horse ran wild across the field.", "to": "הסוס רץ פראי בשדה."}
+        ]
+    },
+    {
+        "text": "guest",
+        "translation": "אורח",
+        "partOfSpeech": "noun",
+        "sentences": [
+            {"from": "We invited many guests to the party.", "to": "הזמנו הרבה אורחים למסיבה."},
+            {"from": "The hotel welcomes every guest with a smile.", "to": "המלון מקבל כל אורח בחיוך."},
+            {"from": "He was a special guest at the event.", "to": "הוא היה אורח מיוחד באירוע."}
         ]
     }
+
 ];

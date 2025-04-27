@@ -4,18 +4,9 @@ words = [
         "translation": "רעיון",
         "partOfSpeech": "noun",
         "sentences": [
-            {
-                "from": "Example sentence with idea.",
-                "to": "תרגום לדוגמה עם idea."
-            },
-            {
-                "from": "Another use of idea in a sentence.",
-                "to": "שימוש נוסף של idea במשפט."
-            },
-            {
-                "from": "Idea can be seen here.",
-                "to": "אפשר לראות את idea כאן."
-            }
+            {"from": "She had a brilliant idea for the project.", "to": "היה לה רעיון מבריק לפרויקט."},
+            {"from": "That's a great idea!", "to": "זה רעיון מצוין!"},
+            {"from": "I like your idea about the trip.", "to": "אני אוהב את הרעיון שלך לגבי הטיול."}
         ]
     },
     {
@@ -23,18 +14,9 @@ words = [
         "translation": "לשפר",
         "partOfSpeech": "verb",
         "sentences": [
-            {
-                "from": "Example sentence with improve.",
-                "to": "תרגום לדוגמה עם improve."
-            },
-            {
-                "from": "Another use of improve in a sentence.",
-                "to": "שימוש נוסף של improve במשפט."
-            },
-            {
-                "from": "Improve can be seen here.",
-                "to": "אפשר לראות את improve כאן."
-            }
+            {"from": "Practice will improve your skills.", "to": "תרגול ישפר את המיומנויות שלך."},
+            {"from": "We need to improve our service.", "to": "אנחנו צריכים לשפר את השירות שלנו."},
+            {"from": "He worked hard to improve his grades.", "to": "הוא עבד קשה כדי לשפר את ציוניו."}
         ]
     },
     {
@@ -42,18 +24,9 @@ words = [
         "translation": "בינלאומי",
         "partOfSpeech": "adjective",
         "sentences": [
-            {
-                "from": "Example sentence with international.",
-                "to": "תרגום לדוגמה עם international."
-            },
-            {
-                "from": "Another use of international in a sentence.",
-                "to": "שימוש נוסף של international במשפט."
-            },
-            {
-                "from": "International can be seen here.",
-                "to": "אפשר לראות את international כאן."
-            }
+            {"from": "She works for an international company.", "to": "היא עובדת עבור חברה בינלאומית."},
+            {"from": "International flights are expensive.", "to": "טיסות בינלאומיות יקרות."},
+            {"from": "The event attracted international guests.", "to": "האירוע משך אורחים בינלאומיים."}
         ]
     },
     {
@@ -61,18 +34,9 @@ words = [
         "translation": "שופט, לשפוט",
         "partOfSpeech": "noun/verb",
         "sentences": [
-            {
-                "from": "Example sentence with judge.",
-                "to": "תרגום לדוגמה עם judge."
-            },
-            {
-                "from": "Another use of judge in a sentence.",
-                "to": "שימוש נוסף של judge במשפט."
-            },
-            {
-                "from": "Judge can be seen here.",
-                "to": "אפשר לראות את judge כאן."
-            }
+            {"from": "The judge made a fair decision.", "to": "השופט קיבל החלטה הוגנת."},
+            {"from": "Don't judge a book by its cover.", "to": "אל תשפוט ספר לפי הכריכה שלו."},
+            {"from": "He was chosen to judge the competition.", "to": "הוא נבחר לשפוט בתחרות."}
         ]
     },
     {
@@ -80,18 +44,9 @@ words = [
         "translation": "אדמה",
         "partOfSpeech": "noun",
         "sentences": [
-            {
-                "from": "Example sentence with land.",
-                "to": "תרגום לדוגמה עם land."
-            },
-            {
-                "from": "Another use of land in a sentence.",
-                "to": "שימוש נוסף של land במשפט."
-            },
-            {
-                "from": "Land can be seen here.",
-                "to": "אפשר לראות את land כאן."
-            }
+            {"from": "The farmers worked the land.", "to": "החקלאים עיבדו את האדמה."},
+            {"from": "They bought a piece of land.", "to": "הם קנו חלקת אדמה."},
+            {"from": "The airplane will land soon.", "to": "המטוס ינחת בקרוב."}
         ]
     },
     {
@@ -99,18 +54,9 @@ words = [
         "translation": "הודעה, להבחין",
         "partOfSpeech": "noun/verb",
         "sentences": [
-            {
-                "from": "Example sentence with notice.",
-                "to": "תרגום לדוגמה עם notice."
-            },
-            {
-                "from": "Another use of notice in a sentence.",
-                "to": "שימוש נוסף של notice במשפט."
-            },
-            {
-                "from": "Notice can be seen here.",
-                "to": "אפשר לראות את notice כאן."
-            }
+            {"from": "I didn't notice him leave.", "to": "לא הבחנתי שהוא עזב."},
+            {"from": "The notice was posted on the wall.", "to": "ההודעה נתלתה על הקיר."},
+            {"from": "Please notice the changes in schedule.", "to": "בבקשה שים לב לשינויים בלוח הזמנים."}
         ]
     },
     {
@@ -118,18 +64,9 @@ words = [
         "translation": "ארגון",
         "partOfSpeech": "noun",
         "sentences": [
-            {
-                "from": "Example sentence with organization.",
-                "to": "תרגום לדוגמה עם organization."
-            },
-            {
-                "from": "Another use of organization in a sentence.",
-                "to": "שימוש נוסף של organization במשפט."
-            },
-            {
-                "from": "Organization can be seen here.",
-                "to": "אפשר לראות את organization כאן."
-            }
+            {"from": "The organization helps homeless people.", "to": "הארגון עוזר לאנשים חסרי בית."},
+            {"from": "He works for a non-profit organization.", "to": "הוא עובד בארגון ללא מטרת רווח."},
+            {"from": "This organization supports education.", "to": "הארגון הזה תומך בחינוך."}
         ]
     },
     {
@@ -137,18 +74,9 @@ words = [
         "translation": "תוכנית",
         "partOfSpeech": "noun",
         "sentences": [
-            {
-                "from": "Example sentence with plan.",
-                "to": "תרגום לדוגמה עם plan."
-            },
-            {
-                "from": "Another use of plan in a sentence.",
-                "to": "שימוש נוסף של plan במשפט."
-            },
-            {
-                "from": "Plan can be seen here.",
-                "to": "אפשר לראות את plan כאן."
-            }
+            {"from": "We need a plan before we start.", "to": "אנחנו צריכים תוכנית לפני שנתחיל."},
+            {"from": "The plan was approved yesterday.", "to": "התוכנית אושרה אתמול."},
+            {"from": "He explained his plan to the team.", "to": "הוא הסביר את התוכנית לצוות."}
         ]
     },
     {
@@ -156,18 +84,9 @@ words = [
         "translation": "כוכב לכת",
         "partOfSpeech": "noun",
         "sentences": [
-            {
-                "from": "Example sentence with planet.",
-                "to": "תרגום לדוגמה עם planet."
-            },
-            {
-                "from": "Another use of planet in a sentence.",
-                "to": "שימוש נוסף של planet במשפט."
-            },
-            {
-                "from": "Planet can be seen here.",
-                "to": "אפשר לראות את planet כאן."
-            }
+            {"from": "Earth is our home planet.", "to": "כדור הארץ הוא כוכב הלכת שלנו."},
+            {"from": "Mars is known as the Red Planet.", "to": "מאדים ידוע ככוכב האדום."},
+            {"from": "Astronomers discovered a new planet.", "to": "אסטרונומים גילו כוכב לכת חדש."}
         ]
     },
     {
@@ -175,18 +94,9 @@ words = [
         "translation": "לזהם",
         "partOfSpeech": "verb",
         "sentences": [
-            {
-                "from": "Example sentence with pollute.",
-                "to": "תרגום לדוגמה עם pollute."
-            },
-            {
-                "from": "Another use of pollute in a sentence.",
-                "to": "שימוש נוסף של pollute במשפט."
-            },
-            {
-                "from": "Pollute can be seen here.",
-                "to": "אפשר לראות את pollute כאן."
-            }
+            {"from": "Factories pollute the air.", "to": "מפעלים מזהמים את האוויר."},
+            {"from": "We must not pollute the rivers.", "to": "אסור לנו לזהם את הנהרות."},
+            {"from": "Cars pollute the environment.", "to": "מכוניות מזהמות את הסביבה."}
         ]
     },
     {
@@ -194,18 +104,9 @@ words = [
         "translation": "מזוהם",
         "partOfSpeech": "adjective",
         "sentences": [
-            {
-                "from": "Example sentence with polluted.",
-                "to": "תרגום לדוגמה עם polluted."
-            },
-            {
-                "from": "Another use of polluted in a sentence.",
-                "to": "שימוש נוסף של polluted במשפט."
-            },
-            {
-                "from": "Polluted can be seen here.",
-                "to": "אפשר לראות את polluted כאן."
-            }
+            {"from": "The beach was polluted with trash.", "to": "החוף היה מזוהם בפסולת."},
+            {"from": "Polluted water is dangerous.", "to": "מים מזוהמים מסוכנים."},
+            {"from": "The polluted air made it hard to breathe.", "to": "האוויר המזוהם הקשה על הנשימה."}
         ]
     },
     {
@@ -213,18 +114,9 @@ words = [
         "translation": "זיהום",
         "partOfSpeech": "noun",
         "sentences": [
-            {
-                "from": "Example sentence with pollution.",
-                "to": "תרגום לדוגמה עם pollution."
-            },
-            {
-                "from": "Another use of pollution in a sentence.",
-                "to": "שימוש נוסף של pollution במשפט."
-            },
-            {
-                "from": "Pollution can be seen here.",
-                "to": "אפשר לראות את pollution כאן."
-            }
+            {"from": "Pollution is a serious problem.", "to": "זיהום הוא בעיה רצינית."},
+            {"from": "The river suffers from pollution.", "to": "הנהר סובל מזיהום."},
+            {"from": "We should fight against pollution.", "to": "אנחנו צריכים להילחם בזיהום."}
         ]
     },
     {
@@ -232,18 +124,9 @@ words = [
         "translation": "גאה",
         "partOfSpeech": "adjective",
         "sentences": [
-            {
-                "from": "Example sentence with proud.",
-                "to": "תרגום לדוגמה עם proud."
-            },
-            {
-                "from": "Another use of proud in a sentence.",
-                "to": "שימוש נוסף של proud במשפט."
-            },
-            {
-                "from": "Proud can be seen here.",
-                "to": "אפשר לראות את proud כאן."
-            }
+            {"from": "I'm proud of my achievements.", "to": "אני גאה בהישגים שלי."},
+            {"from": "His parents are very proud of him.", "to": "הוריו גאים בו מאוד."},
+            {"from": "She felt proud after winning the race.", "to": "היא הרגישה גאה לאחר שניצחה במרוץ."}
         ]
     },
     {
@@ -251,18 +134,9 @@ words = [
         "translation": "איכותי",
         "partOfSpeech": "adjective",
         "sentences": [
-            {
-                "from": "Example sentence with quality.",
-                "to": "תרגום לדוגמה עם quality."
-            },
-            {
-                "from": "Another use of quality in a sentence.",
-                "to": "שימוש נוסף של quality במשפט."
-            },
-            {
-                "from": "Quality can be seen here.",
-                "to": "אפשר לראות את quality כאן."
-            }
+            {"from": "They offer quality service.", "to": "הם מציעים שירות איכותי."},
+            {"from": "The food was of high quality.", "to": "האוכל היה באיכות גבוהה."},
+            {"from": "Quality education is important.", "to": "חינוך איכותי הוא חשוב."}
         ]
     },
     {
@@ -270,18 +144,9 @@ words = [
         "translation": "מצב",
         "partOfSpeech": "noun",
         "sentences": [
-            {
-                "from": "Example sentence with situation.",
-                "to": "תרגום לדוגמה עם situation."
-            },
-            {
-                "from": "Another use of situation in a sentence.",
-                "to": "שימוש נוסף של situation במשפט."
-            },
-            {
-                "from": "Situation can be seen here.",
-                "to": "אפשר לראות את situation כאן."
-            }
+            {"from": "The situation is under control.", "to": "המצב בשליטה."},
+            {"from": "They discussed the current situation.", "to": "הם דנו במצב הנוכחי."},
+            {"from": "It's a difficult situation for everyone.", "to": "זה מצב קשה לכולם."}
         ]
     }
 ];
