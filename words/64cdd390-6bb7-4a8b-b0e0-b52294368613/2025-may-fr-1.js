@@ -1,4 +1,4 @@
-export const words = [
+words = [
   { text: 'Parler', translation: 'לדבר', partOfSpeech: 'noun', sentences: [{"from": "Il aime parler avec ses amis.", "to": "הוא אוהב לדבר עם חבריו."}] },
   { text: 'Habiter', translation: 'לגור', partOfSpeech: 'noun', sentences: [{"from": "Elle habite à Paris.", "to": "היא גרה בפריז."}] },
   { text: 'Regarder', translation: 'להסתכל- לצפות', partOfSpeech: 'noun', sentences: [{"from": "Ils aiment regarder des films.", "to": "הם אוהבים לצפות בסרטים."}] },
@@ -40,4 +40,4 @@ export const words = [
   { text: 'L’informatique', translation: 'מחשבים', partOfSpeech: 'noun', sentences: [{"from": "Elle étudie l’informatique à l’université.", "to": "היא לומדת מחשבים באוניברסיטה."}] },
   { text: "C’est", translation: 'זה', partOfSpeech: 'noun', sentences: [{"from": "C'est une bonne idée.", "to": "זו רעיון טוב."}] },
   { text: 'À la maison', translation: 'בבית', partOfSpeech: 'noun', sentences: [{"from": "Je reste à la maison ce soir.", "to": "אני נשאר בבית הערב."}] }
-];
+]
