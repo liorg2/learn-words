@@ -18,7 +18,12 @@ words = [
   { text: 'Et', translation: 'ו', partOfSpeech: 'noun', sentences: [{"from": "Il aime le café et le thé.", "to": "הוא אוהב קפה ותה."}] },
   { text: 'Pourquoi', translation: 'למה', partOfSpeech: 'noun', sentences: [{"from": "Pourquoi es-tu en retard?", "to": "למה אתה מאחר?"}] },
   { text: "Qu'est-ce que", translation: 'מה', partOfSpeech: 'noun', sentences: [{"from": "Qu'est-ce que tu fais?", "to": "מה אתה עושה?"}] },
-  { text: "Est-ce que", translation: 'האם', partOfSpeech: 'noun', sentences: [{"from": "Est-ce que tu viens avec nous?", "to": "האם אתה בא איתנו?"}] }
+  {
+    text: "Est-ce que",
+    translation: 'האם',
+    partOfSpeech: 'noun',
+    sentences: [{"from": "Est-ce que tu viens avec nous?", "to": "האם אתה בא איתנו?"}]
+  },
     { text: 'Ennuyant', translation: 'משעמם', partOfSpeech: 'noun', sentences: [{"from": "Le film était ennuyant.", "to": "הסרט היה משעמם."}] },
   { text: 'Facile', translation: 'קל', partOfSpeech: 'noun', sentences: [{"from": "Ce test est facile.", "to": "המבחן הזה קל."}] },
   { text: 'Difficile', translation: 'קשה', partOfSpeech: 'noun', sentences: [{"from": "Cette question est difficile.", "to": "השאלה הזו קשה."}] },
