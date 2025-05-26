@@ -5,7 +5,7 @@ tests_list = [
         lang: 'fr',
     },
     {
-        scriptUrl: "2025-may-fr-3.js",
+        scriptUrl: "2025-may-fr-2.js",
         name: "צרפתית 5/25 - 2",
         lang: 'fr',
     },
